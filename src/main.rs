@@ -5,9 +5,9 @@ mod pdfview;
 mod shared;
 
 use crate::constants::{PDF_PATH, PDFIUM_DLL, PREFERRED_WINDOW, RENDER_WIDTH_PX, SCREEN_MARGIN};
+use crate::page::RenderedPage;
 use crate::pdfview::PdfView;
 use crate::shared::Shared;
-use crate::page::{RenderedPage};
 
 use std::collections::VecDeque;
 use std::env;
