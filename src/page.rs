@@ -7,9 +7,13 @@ pub struct RenderedPage {
 }
 
 pub struct PageLayout {
+    /// vertical pos from where the page starts, including the top gap
     pub tops: Vec<f32>,
+    /// height of each page
     pub heights: Vec<f32>,
+    /// vertical pos till the page + PAGE_GAP
     pub bottoms: Vec<f32>,
+    /// total scroll height
     pub total: f32,
 }
 
