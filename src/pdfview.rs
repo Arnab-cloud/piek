@@ -107,6 +107,13 @@ impl PdfView {
     }
 }
 
+impl Drop for PdfView {
+    fn drop(&mut self) {
+        // Lets the pdfium worker thread exit when this document is closed.
+        self.shared.shutdown();
+    }
+}
+
 impl Render for PdfView {
     fn render(&mut self, window: &mut Window, cx: &mut gpui::Context<Self>) -> impl IntoElement {
         let n = self.layout.len();
