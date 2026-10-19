@@ -65,9 +65,8 @@ impl PiekApp {
                     Ok(doc) => {
                         // Replacing the old viewer drops it, which shuts down
                         // its worker thread.
-                        app.viewer = Some(
-                            cx.new(|cx| PdfView::new(doc.sizes, doc.shared, doc.results, cx)),
-                        );
+                        app.viewer =
+                            Some(cx.new(|cx| PdfView::new(doc.sizes, doc.shared, doc.results, cx)));
                     }
                     Err(err) => {
                         eprintln!("failed to open pdf: {err:#}");
@@ -82,33 +81,37 @@ impl PiekApp {
     }
 
     fn empty_state(&self, cx: &mut Context<Self>) -> impl IntoElement {
-        let label = if self.loading { "Opening…" } else { "Open PDF" };
+        let label = if self.loading {
+            "Opening…"
+        } else {
+            "Open PDF"
+        };
 
         let mut column = div()
             .size_full()
-            .bg(rgb(0x2b2b2b))
+            .bg(rgb(0x21252b))
             .flex()
             .flex_col()
             .items_center()
             .justify_center()
-            .gap(px(16.0))
-            .child(div().text_size(px(28.0)).text_color(rgb(0xeeeeee)).child("Piek"))
+            .gap(px(12.0))
             .child(
                 div()
                     .text_size(px(15.0))
-                    .text_color(rgb(0x999999))
-                    .child("No PDF is open. Open a file to get started."),
+                    .text_color(rgb(0xabb2bf))
+                    .child("No PDF open."),
             )
             .child(
                 div()
                     .id("open-pdf")
-                    .px(px(20.0))
-                    .py(px(10.0))
+                    .px(px(16.0))
+                    .py(px(8.0))
                     .rounded(px(6.0))
-                    .bg(rgb(0x3b82f6))
+                    .bg(rgb(0x2c313a))
+                    .text_size(px(15.0))
                     .text_color(rgb(0xffffff))
                     .cursor_pointer()
-                    .hover(|style| style.bg(rgb(0x2563eb)))
+                    .hover(|style| style.bg(rgb(0x353b45)).text_color(rgb(0xe5c07b)))
                     .on_click(cx.listener(|this, _, _, cx| {
                         if !this.loading {
                             this.prompt_open(cx);
